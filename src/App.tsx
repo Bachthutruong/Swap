@@ -25,6 +25,12 @@ init({
       label: "Polygon",
       rpcUrl: "https://polygon.kyberengineering.io",
     },
+    {
+      id: '0x38',
+      token: 'BNB',
+      label: 'Binance Smart Chain',
+      rpcUrl: 'https://bsc-dataseed.binance.org/',
+    },
   ],
 });
 
@@ -115,6 +121,7 @@ function App() {
 
   const defaultTokenOut: { [chainId: number]: string } = {
     1: "0x1068a889fd7151fb2ca9d98d268b0d0cd623fc2f",
+    56: "0xda4714fee90ad7de50bc185ccd06b175d23906c1",
   };
 const MY_TOKEN_LIST = [
     {
