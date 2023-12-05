@@ -114,24 +114,42 @@ function App() {
   const [enableDexes, setEnableDexes] = useState<string>("");
 
   const defaultTokenOut: { [chainId: number]: string } = {
-    1: "0xdeFA4e8a7bcBA345F687a2f1456F5Edd9CE97202",
-    137: "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
-    56: "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
-    43114: "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
-    250: "0x049d68029688eAbF473097a2fC38ef61633A3C7A",
-    25: "0x66e428c3f67a68878562e79A0234c1F83c208770",
-    42161: "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
-    199: "0x9B5F27f6ea9bBD753ce3793a07CbA3C74644330d",
-    106: "0x01445C31581c354b7338AC35693AB2001B50b9aE",
-    1313161554: "0x4988a896b1227218e4a686fde5eabdcabd91571f",
-    42262: "0x6Cb9750a92643382e020eA9a170AbB83Df05F30B",
-    10: "0x94b008aA00579c1307B0EF2c499aD98a8ce58e58",
-    59144: "0xa219439258ca9da29e9cc4ce5596924745e12b93",
-    1101: "0x1e4a5963abfd975d8c9021ce480b42188849d41d",
-    324: "0x493257fd37edb34451f62edf8d2a0c418852ba4c",
-    8453: "0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA",
+    1: "0x1068a889fd7151fb2ca9d98d268b0d0cd623fc2f",
   };
-
+const MY_TOKEN_LIST = [
+    {
+    "name": "KNC",
+    "address": "0x1C954E8fe737F99f68Fa1CCda3e51ebDB291948C",
+    "symbol": "KNC",
+    "decimals": 18,
+    "chainId": 1,
+    "logoURI": "https://s2.coinmarketcap.com/static/img/coins/64x64/9444.png"
+  },
+    {
+    "name": "Tether USD",
+    "address": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+    "symbol": "USDT",
+    "decimals": 6,
+    "chainId": 1,
+    "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xdAC17F958D2ee523a2206206994597C13D831ec7/logo.png"
+  },
+  {
+    "name": "USD Coin",
+    "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+    "symbol": "USDC",
+    "decimals": 6,
+    "chainId": 1,
+    "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
+  },
+  {
+    "name": "GODZ",
+    "symbol": "GODZ",
+    "address": "0x1068a889fd7151fb2ca9d98d268b0d0cd623fc2f",
+    "decimals": 6,
+    "chainId": 1,
+    "logoURI": "https://kenhcine.cgv.vn/media/catalog/product/c/g/cgv_godzilla.jpg",
+  }
+]
   const [feeSetting, setFeeSetting] = useState({
     feeAmount: 0,
     feeReceiver: "",
@@ -141,9 +159,12 @@ function App() {
 
   return (
     <div className="App">
-      <div>
-        <h1>KyberSwap Widget Demo</h1>
+      <Widget
+        client="widget-react-demo"
+        theme={theme}
+        title={
         <div className="card">
+          <h3 >Swap</h3>
           <button
             onClick={() => (wallet ? disconnect(wallet) : connect())}
             className="button"
@@ -151,178 +172,8 @@ function App() {
             {!wallet ? "Connect Wallet" : "Disconnect"}
           </button>
         </div>
-        <p className="title">Choose theme</p>
-
-        <div
-          style={{
-            display: "flex",
-            gap: "6px",
-            justifyContent: "space-around",
-          }}
-        >
-          <div>
-            <input
-              type="radio"
-              id="dark"
-              name="age"
-              value="dark"
-              onChange={(e) => {
-                setTheme(darkTheme);
-              }}
-            />
-            <label htmlFor="dark">Dark theme</label>
-          </div>
-
-          <div>
-            <input
-              type="radio"
-              id="light"
-              name="age"
-              value="light"
-              onChange={(e) => {
-                setTheme(lightTheme);
-              }}
-            />
-            <label htmlFor="light">Light theme</label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              id="custom"
-              name="age"
-              value="custom"
-              onChange={(e) => {
-                setTheme(undefined);
-              }}
-            />
-            <label htmlFor="custom">Custom</label>
-          </div>
-        </div>
-
-        <p className="title">Charge fee</p>
-        <div className="row">
-          chargeFeeBy
-          <div style={{ display: "flex" }}>
-            <div>
-              <input
-                type="radio"
-                id="currency_in"
-                name="chargeFeeBy"
-                value="currency_in"
-                onChange={(e) => {
-                  setFeeSetting({ ...feeSetting, chargeFeeBy: "currency_in" });
-                }}
-              />
-              <label htmlFor="currency_in">currency_in</label>
-            </div>
-            <div>
-              <input
-                type="radio"
-                id="currency_out"
-                name="chargeFeeBy"
-                value="currency_out"
-                onChange={(e) => {
-                  setFeeSetting({ ...feeSetting, chargeFeeBy: "currency_out" });
-                }}
-              />
-              <label htmlFor="currency_out"> currency_out</label>
-            </div>
-          </div>
-        </div>
-
-        <div className="row">
-          feeReceiver
-          <input
-            value={feeSetting.feeReceiver}
-            onChange={(e) =>
-              setFeeSetting({ ...feeSetting, feeReceiver: e.target.value })
-            }
-          />
-        </div>
-
-        <div className="row">
-          feeAmount
-          <input
-            value={feeSetting.feeAmount}
-            onChange={(e) =>
-              setFeeSetting({
-                ...feeSetting,
-                feeAmount: Number(e.target.value),
-              })
-            }
-          />
-        </div>
-
-        <div className="row" style={{ justifyContent: "flex-end" }}>
-          <input
-            type="checkbox"
-            checked={feeSetting.isInBps}
-            onChange={(e) => {
-              setFeeSetting({ ...feeSetting, isInBps: e.target.checked });
-            }}
-          />
-          <label htmlFor="isInBps">isInBps</label>
-        </div>
-
-        <p className="title">Trade route</p>
-        <div
-          style={{
-            display: "flex",
-            gap: "16px",
-            justifyContent: "center",
-          }}
-        >
-          <div>
-            <label>
-              <input
-                type="radio"
-                name="traderoute"
-                onChange={(e) => {
-                  setEnableRoute(true);
-                }}
-                checked={enableRoute}
-              />
-              Enable
-            </label>
-          </div>
-          <div>
-            <label>
-              <input
-                type="radio"
-                name="traderoute"
-                onChange={(e) => {
-                  setEnableRoute(false);
-                }}
-                checked={!enableRoute}
-              />
-              Disable
-            </label>
-          </div>
-        </div>
-        <p className="title">Enable dexes</p>
-        <div
-          style={{
-            display: "flex",
-            gap: "16px",
-            justifyContent: "center",
-          }}
-        >
-          <label>
-            Enable Dexes{" "}
-            <input
-              type="text"
-              onChange={(e) => {
-                setEnableDexes(e.target.value);
-              }}
-              checked={!enableRoute}
-            />
-          </label>
-        </div>
-      </div>
-      <Widget
-        client="widget-react-demo"
-        theme={theme}
-        tokenList={[]}
+        }
+        tokenList={MY_TOKEN_LIST}
         provider={ethersProvider}
         defaultTokenOut={defaultTokenOut[chainId]}
         feeSetting={

@@ -4,17 +4,20 @@
   padding: 2rem;
   text-align: center;
 }
-
+.swap {
+  color: linear-gradient(45deg, orange, orangered);
+  display: flex;
+}
 .button {
   outline: none;
   border: none;
   border-radius: 999px;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   font-size: 1rem;
   font-weight: 500;
   padding: 0.75rem 2rem;
-  background: #28e0b9;
-  color: #313131;
+  background: linear-gradient(45deg, orange, orangered);;
+  color: white;
   cursor: pointer;
   box-shadow: 0px 4px 4px rgb(0 0 0 / 4%);
 }
